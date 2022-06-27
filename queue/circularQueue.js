@@ -2,9 +2,9 @@
 // The order is First In First Out (FIFO).
 
 // Basic Operations
-// enqueue() − add (store) an item to the queue.
-// dequeue() − remove (access) an item from the queue.
-// peek() − Gets the element at the front of the queue without removing it.
+// enqueue() − add (store) an item to the queue [time - O(1), space - O(1)].
+// dequeue() − remove (access) an item from the queue [time - O(1), space - O(1)].
+// peek() − Gets the element at the front of the queue without removing it [time - O(1), space - O(1)].
 // isEmpty() − check if queue is empty.
 
 class Queue {

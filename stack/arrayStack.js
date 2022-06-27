@@ -4,9 +4,9 @@
 // Implementing it with array
 
 // Basic Operations
-// push() − Pushing (storing) an element on the stack.
-// pop() − Removing (accessing) an element from the stack.
-// peek() − get the top data element of the stack, without removing it.
+// push() − Pushing (storing) an element on the stack. [time - O(1), space - O(1)]
+// pop() − Removing (accessing) an element from the stack. [time - O(1), space - O(1)]
+// peek() − get the top data element of the stack, without removing it. [time - O(1), space - O(1)]
 // isFull() − check if stack is full.
 // isEmpty() − check if stack is empty.
 
