@@ -29,7 +29,7 @@ class Stack {
 	}
 
 	push(data) {
-		if (this.item.length < this.length) {
+		if (!this.isFull()) {
 			this.item.push(data);
 		} else {
 			return new RangeError('Stack Full');

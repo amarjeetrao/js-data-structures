@@ -29,10 +29,10 @@ class Queue {
 	}
 
 	enqueue(data) {
-		if (this.item.length < this.length) {
+		if (!this.isFull()) {
 			this.item.push(data);
 		} else {
-			return new RangeError('queue Full');
+			return new RangeError('Queue Full');
 		}
 	}
 
