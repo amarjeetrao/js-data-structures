@@ -10,7 +10,7 @@
 // Deletion -
 // 1. at beginning (unshift)
 // 2. at end (pop)
-// 3. random (delete)
+// 3. random (remove)
 
 // Display -
 //Full List (print)
@@ -62,17 +62,17 @@ class SinglyLinkedList {
 
 	//insert at random position
 	insert(value, after) {
-		let node = new Node(value);
-
 		//case if list is empty
 		if (!this.head) {
 			return null;
 		}
 
+		let node = new Node(value);
 		let current = this.head;
 		while (current) {
 			// after values is at end
 			if (after == current.value) {
+				this.length++;
 				if (after == this.tail.value) {
 					this.tail.next = node;
 					this.tail = node;
@@ -139,6 +139,7 @@ console.log(linkedList.append('first'));
 console.log(linkedList.append('second'));
 console.log(linkedList.prepend('first top'));
 console.log(linkedList.append('last'));
+// console.log(linkedList.remove('second'));
 console.log(linkedList.insert('random', 'last'));
 console.log(linkedList.isEmpty());
 console.log(linkedList.listLength());
