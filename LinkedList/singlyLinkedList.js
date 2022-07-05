@@ -33,7 +33,7 @@ class SinglyLinkedList {
 	//insert at beginning
 	prepend(value) {
 		const node = new Node(value);
-		if (!this.head) {
+		if (this.isEmpty()) {
 			//case if list is empty
 			this.tail = node;
 		} else {
@@ -48,7 +48,7 @@ class SinglyLinkedList {
 	//insert at end
 	append(value) {
 		const node = new Node(value);
-		if (!this.head) {
+		if (this.isEmpty()) {
 			//case if list is empty
 			this.head = node;
 		} else {
@@ -63,7 +63,7 @@ class SinglyLinkedList {
 	//insert at random position
 	insert(value, after) {
 		//case if list is empty
-		if (!this.head) {
+		if (this.isEmpty()) {
 			return null;
 		}
 
@@ -93,7 +93,7 @@ class SinglyLinkedList {
 	//deleting the head node
 	shift() {
 		//case if list is empty
-		if (!this.head) {
+		if (this.isEmpty()) {
 			return null;
 		}
 		let removedItem = this.head;
@@ -110,7 +110,7 @@ class SinglyLinkedList {
 	//deleting the last node
 	pop() {
 		//case if list is empty
-		if (!this.head) {
+		if (this.isEmpty()) {
 			return null;
 		}
 
@@ -133,14 +133,14 @@ class SinglyLinkedList {
 	}
 
 	//get value by index
-	getByIndex(index) {
+	get(index) {
 		if (index < 0 || index >= this.length) {
 			console.log('Out of bound Index');
 			return null;
 		}
 
 		//case if list is empty
-		if (!this.head) {
+		if (this.isEmpty()) {
 			return null;
 		}
 
@@ -155,6 +155,35 @@ class SinglyLinkedList {
 		return current;
 	}
 
+	//set value by index
+	set(index, value) {
+		let node = this.get(index);
+		if (node) {
+			node.value = value;
+			return this;
+		}
+		return null;
+	}
+
+	//find item by value and return index
+	find(value) {
+		if (this.isEmpty()) {
+			return -1
+		}
+
+		let current = this.head;
+		let index = 0;
+		while (current) {
+			if (current.value === value) {
+				return index;
+			}
+			current = current.next;
+			index++;
+		}
+
+		return -1;
+	}
+
 	// check for list is empty
 	isEmpty() {
 		return this.length == 0;
@@ -167,7 +196,7 @@ class SinglyLinkedList {
 
 	//show full list
 	print() {
-		if (!this.head) {
+		if (this.isEmpty()) {
 			console.log('List is Empty');
 			return null;
 		}
@@ -186,8 +215,15 @@ const linkedList = new SinglyLinkedList();
 console.log(linkedList.append('first'));
 console.log(linkedList.append('second'));
 console.log(linkedList.append('last'));
-console.log(linkedList.insert('random', 'last'));
+console.log(linkedList.print());
+
 console.log(linkedList.shift());
 console.log(linkedList.pop());
+console.log(linkedList.print());
+
 console.log(linkedList.listLength());
-console.log(linkedList.getByIndex(-1));
+console.log(linkedList.get(0));
+console.log(linkedList.set(1, 'new item'));
+console.log(linkedList.find('second'));
+console.log(linkedList.find('new item'));
+console.log(linkedList.print());
