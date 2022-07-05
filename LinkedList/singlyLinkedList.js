@@ -8,13 +8,13 @@
 // 3. random (insert) [time - O(n), space - O(1)]
 
 // Deletion -
-// 1. at beginning (unshift)
+// 1. at beginning (shift)
 // 2. at end (pop)
 // 3. random (remove)
 
 // Display -
 //Full List (print)
-//Single Node
+//Single Node by indexed (get)
 
 class Node {
 	constructor(value) {
@@ -90,6 +90,23 @@ class SinglyLinkedList {
 		return null;
 	}
 
+	//deleting the head node
+	shift() {
+		//case if list is empty
+		if (!this.head) {
+			return null;
+		}
+		let removedItem = this.head;
+		this.head = this.head.next;
+		this.length--;
+
+		//reset for length 0
+		if (this.length === 0) {
+			this.tail = null;
+		}
+		return removedItem;
+	}
+
 	//deleting the last node
 	pop() {
 		//case if list is empty
@@ -98,12 +115,43 @@ class SinglyLinkedList {
 		}
 
 		let current = this.head;
+		let newTail = current;
 		while (current.next) {
+			newTail = current;
 			current = current.next;
 		}
-		this.tail = current;
+		this.tail = newTail;
 		this.tail.next = null;
 		this.length--;
+
+		//reset for length 0
+		if (this.length === 0) {
+			this.head = null;
+			this.tail = null;
+		}
+		return current;
+	}
+
+	//get value by index
+	getByIndex(index) {
+		if (index < 0 || index >= this.length) {
+			console.log('Out of bound Index');
+			return null;
+		}
+
+		//case if list is empty
+		if (!this.head) {
+			return null;
+		}
+
+		let current = this.head;
+		let start = 0;
+
+		while (start < index) {
+			current = current.next;
+			start++;
+		}
+
 		return current;
 	}
 
@@ -137,10 +185,9 @@ class SinglyLinkedList {
 const linkedList = new SinglyLinkedList();
 console.log(linkedList.append('first'));
 console.log(linkedList.append('second'));
-console.log(linkedList.prepend('first top'));
 console.log(linkedList.append('last'));
-// console.log(linkedList.remove('second'));
 console.log(linkedList.insert('random', 'last'));
-console.log(linkedList.isEmpty());
+console.log(linkedList.shift());
+console.log(linkedList.pop());
 console.log(linkedList.listLength());
-console.log(linkedList.print());
+console.log(linkedList.getByIndex(-1));
