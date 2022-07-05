@@ -61,31 +61,38 @@ class SinglyLinkedList {
 	}
 
 	//insert at random position
-	insert(value, after) {
+	insert(value, index) {
 		//case if list is empty
 		if (this.isEmpty()) {
 			return null;
 		}
 
-		let node = new Node(value);
-		let current = this.head;
-		while (current) {
-			// after values is at end
-			if (after == current.value) {
-				this.length++;
-				if (after == this.tail.value) {
-					this.tail.next = node;
-					this.tail = node;
-					return this;
-				}
-
-				node.next = current.next;
-				current.next = node;
-				return this;
-			}
-
-			current = current.next;
+		if (index < 0 || index >= this.length) {
+			console.log('Out of bound Index');
+			return null;
 		}
+
+		if (index == 0) {
+			return this.prepend(value);
+		}
+
+		if (index == this.listLength()) {
+			return this.append(value);
+		}
+
+		let current = this.head;
+		let position = 1;
+		while (current.next) {
+			if (position === index) {
+				let node = new Node(value);
+
+				current.next = node;
+				node.next = current.next;
+			}
+			current = current.next;
+			position++;
+		}
+
 		console.log('No point of insertion found');
 		return null;
 	}
