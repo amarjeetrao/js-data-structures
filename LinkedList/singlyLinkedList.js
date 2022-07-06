@@ -8,14 +8,14 @@
 // 3. random (insert) [time - O(n), space - O(1)]
 
 // Deletion -
-// 1. at beginning (shift)
-// 2. at end (pop)
-// 3. random (remove)
+// 1. at beginning (shift) [time - O(1), space - O(1)]
+// 2. at end (pop) [time - O(1), space - O(1)]
+// 3. random (remove) [time - O(n), space - O(1)]
 
 // Display -
-//Full List (print)
-//Single Node by indexed (get)
-//Find Node by value (find)
+//Full List (print) [time - O(n), space - O(1)]
+//Single Node by indexed (get) [time - O(n), space - O(1)]
+//Find Node by value (find) [time - O(n), space - O(1)]
 
 class Node {
 	constructor(value) {
@@ -208,6 +208,29 @@ class SinglyLinkedList {
 		return -1;
 	}
 
+	//reverse the list
+	reverse() {
+		let prev = null;
+		let curr = this.head;
+
+		while (curr) {
+			//get the current's next node
+			let next = curr.next;
+			//set the current node to previous
+			curr.next = prev;
+			//reset prev to current for future
+			prev = curr;
+			//set current to detached next node
+			curr = next;
+		}
+
+		//swap tail and head
+		this.tail = this.head;
+		this.head = prev;
+
+		return this;
+	}
+
 	// check for list is empty
 	isEmpty() {
 		return this.length == 0;
@@ -236,9 +259,12 @@ class SinglyLinkedList {
 }
 
 const linkedList = new SinglyLinkedList();
-console.log(linkedList.append('first'));
-console.log(linkedList.append('second'));
-console.log(linkedList.append('last'));
+console.log(linkedList.append('1'));
+console.log(linkedList.append('2'));
+console.log(linkedList.append('3'));
+console.log(linkedList.append('4'));
+console.log(linkedList.append('5'));
+console.log(linkedList.append('6'));
 console.log(linkedList.print());
 
 console.log(linkedList.shift());
@@ -247,7 +273,9 @@ console.log(linkedList.print());
 
 console.log(linkedList.listLength());
 console.log(linkedList.get(0));
-console.log(linkedList.set(1, 'new item'));
-console.log(linkedList.find('second'));
-console.log(linkedList.find('new item'));
+console.log(linkedList.set(1, '10'));
+console.log(linkedList.find('5'));
+console.log(linkedList.find('2'));
+console.log(linkedList.print());
+console.log(linkedList.reverse());
 console.log(linkedList.print());
