@@ -15,6 +15,7 @@
 // Display -
 //Full List (print)
 //Single Node by indexed (get)
+//Find Node by value (find)
 
 class Node {
 	constructor(value) {
@@ -61,40 +62,29 @@ class SinglyLinkedList {
 	}
 
 	//insert at random position
-	insert(value, index) {
-		//case if list is empty
-		if (this.isEmpty()) {
-			return null;
-		}
-
+	insert(index, value) {
 		if (index < 0 || index >= this.length) {
 			console.log('Out of bound Index');
-			return null;
+			return false;
 		}
 
 		if (index == 0) {
-			return this.prepend(value);
+			return !!this.prepend(value);
 		}
 
 		if (index == this.listLength()) {
-			return this.append(value);
+			return !!this.append(value);
 		}
 
-		let current = this.head;
-		let position = 1;
-		while (current.next) {
-			if (position === index) {
-				let node = new Node(value);
-
-				current.next = node;
-				node.next = current.next;
-			}
-			current = current.next;
-			position++;
+		let prevNode = this.get(index - 1);
+		if (prevNode) {
+			let node = new Node(value);
+			node.next = prevNode.next;
+			prevNode.next = node;
+			return true;
 		}
 
-		console.log('No point of insertion found');
-		return null;
+		return false;
 	}
 
 	//deleting the head node
@@ -175,7 +165,7 @@ class SinglyLinkedList {
 	//find item by value and return index
 	find(value) {
 		if (this.isEmpty()) {
-			return -1
+			return -1;
 		}
 
 		let current = this.head;
