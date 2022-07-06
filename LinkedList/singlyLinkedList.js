@@ -63,7 +63,7 @@ class SinglyLinkedList {
 
 	//insert at random position
 	insert(index, value) {
-		if (index < 0 || index >= this.length) {
+		if (index < 0 || index > this.length) {
 			console.log('Out of bound Index');
 			return false;
 		}
@@ -81,6 +81,7 @@ class SinglyLinkedList {
 			let node = new Node(value);
 			node.next = prevNode.next;
 			prevNode.next = node;
+			this.length++;
 			return true;
 		}
 
@@ -127,6 +128,32 @@ class SinglyLinkedList {
 			this.tail = null;
 		}
 		return current;
+	}
+
+	//remove at random position
+	remove(index) {
+		if (index < 0 || index >= this.length) {
+			console.log('Out of bound Index');
+			return false;
+		}
+
+		if (index == 0) {
+			return this.shift();
+		}
+
+		if (index == this.listLength() - 1) {
+			return this.pop();
+		}
+
+		let removed = null;
+		let prevNode = this.get(index - 1);
+		if (prevNode) {
+			removed = prevNode.next;
+			prevNode.next = prevNode.next.next;
+			this.length--;
+		}
+
+		return removed;
 	}
 
 	//get value by index
