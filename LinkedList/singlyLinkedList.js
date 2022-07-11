@@ -94,7 +94,7 @@ class SinglyLinkedList {
 		if (this.isEmpty()) {
 			return null;
 		}
-		let removedItem = this.head;
+		let removedNode = this.head;
 		this.head = this.head.next;
 		this.length--;
 
@@ -102,7 +102,7 @@ class SinglyLinkedList {
 		if (this.length === 0) {
 			this.tail = null;
 		}
-		return removedItem;
+		return removedNode;
 	}
 
 	//deleting the last node
@@ -145,15 +145,15 @@ class SinglyLinkedList {
 			return this.pop();
 		}
 
-		let removed = null;
+		let removedNode = null;
 		let prevNode = this.get(index - 1);
 		if (prevNode) {
-			removed = prevNode.next;
+			removedNode = prevNode.next;
 			prevNode.next = prevNode.next.next;
 			this.length--;
 		}
 
-		return removed;
+		return removedNode;
 	}
 
 	//get value by index
