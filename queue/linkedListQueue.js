@@ -44,11 +44,11 @@ class Queue {
 			if (this.isEmpty()) {
 				//case if list is empty
 				this.first = node;
+				this.last = node;
 			} else {
 				this.last.next = node;
+				this.last = node;
 			}
-			//set the new tail
-			this.last = node;
 			return ++this.position;
 		}
 		return this.position;
