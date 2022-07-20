@@ -56,10 +56,11 @@ class Stack {
 
 	pop() {
 		if (this.isEmpty()) {
-			return -1;
+			return null;
 		}
+		const removedVal = this.first.value;
 		this.first = this.first.next;
-		return --this.position;
+		return removedVal;
 	}
 
 	peek() {
