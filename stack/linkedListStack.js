@@ -68,18 +68,7 @@ class Stack {
 	}
 
 	print() {
-		if (this.isEmpty()) {
-			console.log('List is Empty');
-			return null;
-		}
-
-		let listValues = '';
-		let current = this.first;
-		while (current) {
-			listValues += current.value + ' ';
-			current = current.next;
-		}
-		return listValues;
+		return this.first.value;
 	}
 }
 
