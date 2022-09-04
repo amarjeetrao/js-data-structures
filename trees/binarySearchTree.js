@@ -20,39 +20,43 @@ class Node {
 
 class BinarySearchTree {
 	constructor() {
-		this.root = null
+		this.root = null;
 	}
 
 	insert(value, currentNode = this.root) {
 		//check if BST empty
 		if (this.isEmpty()) {
-			this.root = new Node(value)
-			return true
+			this.root = new Node(value);
+			return true;
 		}
 
 		//duplicate insertion handling
 		if (value === currentNode.value) {
-			console.log('Already in BST')
-			return false
+			console.log('Already in BST');
+			return false;
 		}
 
 		//search and insert to the right
 		if (currentNode && value > currentNode.value) {
-			currentNode.right ? this.insert(value, currentNode.right) : currentNode.right = new Node(value)
-			return true
+			currentNode.right
+				? this.insert(value, currentNode.right)
+				: (currentNode.right = new Node(value));
+			return true;
 		}
 
 		//search and insert to the left
 		if (currentNode && value < currentNode.value) {
-			currentNode.left ? this.insert(value, currentNode.left) : currentNode.left = new Node(value)
-			return true
+			currentNode.left
+				? this.insert(value, currentNode.left)
+				: (currentNode.left = new Node(value));
+			return true;
 		}
 	}
 
 	find(value, currentNode = this.root) {
 		//check if BST empty
 		if (this.isEmpty()) {
-			return null
+			return null;
 		}
 
 		if (value === currentNode.value) {
@@ -61,7 +65,9 @@ class BinarySearchTree {
 
 		//search to the right
 		if (currentNode && value > currentNode.value) {
-			return currentNode.left ? this.find(value, currentNode.right) : null;
+			return currentNode.left
+				? this.find(value, currentNode.right)
+				: null;
 		}
 
 		//search to the left
@@ -70,17 +76,74 @@ class BinarySearchTree {
 		}
 	}
 
+	breadthFirstSearch() {
+		let data = [];
+		let queue = [];
+
+		//check for bst is empty
+		if (this.isEmpty()) {
+			return data;
+		}
+
+		let node = this.root;
+		queue.push(node);
+		//until there is data in queue we remove it and mark it as visited
+		while (queue.length) {
+			node = queue.shift();
+			data.push(node.value);
+			node.left && queue.push(node.left);
+			node.right && queue.push(node.right);
+		}
+		return data;
+	}
+
+	//depth first search preOrder
+	preOrder(data = [], node = this.root) {
+		if (this.isEmpty()) {
+			return data;
+		}
+
+		data.push(node.value);
+		node.left && this.preOrder(data, node.left);
+		node.right && this.preOrder(data, node.right);
+		return data;
+	}
+
+	//depth first search inOrder
+	inOrder(data = [], node = this.root) {
+		if (this.isEmpty()) {
+			return data;
+		}
+
+		node.left && this.preOrder(data, node.left);
+		data.push(node.value);
+		node.right && this.preOrder(data, node.right);
+		return data;
+	}
+
+	//depth first search postOrder
+	postOrder(data = [], node = this.root) {
+		if (this.isEmpty()) {
+			return data;
+		}
+
+		node.left && this.preOrder(data, node.left);
+		node.right && this.preOrder(data, node.right);
+		data.push(node.value);
+		return data;
+	}
+
 	isEmpty() {
-		return !this.root
+		return !this.root;
 	}
 }
 
 //sample data
 const tree = new BinarySearchTree()
 tree.insert(10)
+tree.insert(6)
+tree.insert(15)
+tree.insert(3)
 tree.insert(8)
 tree.insert(20)
-tree.insert(18)
-tree.insert(30)
-tree.insert(9)
-tree.find(18)
+console.log(tree.preOrder());
