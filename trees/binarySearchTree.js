@@ -115,9 +115,9 @@ class BinarySearchTree {
 			return data;
 		}
 
-		node.left && this.preOrder(data, node.left);
+		node.left && this.inOrder(data, node.left);
 		data.push(node.value);
-		node.right && this.preOrder(data, node.right);
+		node.right && this.inOrder(data, node.right);
 		return data;
 	}
 
@@ -127,8 +127,8 @@ class BinarySearchTree {
 			return data;
 		}
 
-		node.left && this.preOrder(data, node.left);
-		node.right && this.preOrder(data, node.right);
+		node.left && this.postOrder(data, node.left);
+		node.right && this.postOrder(data, node.right);
 		data.push(node.value);
 		return data;
 	}
@@ -146,4 +146,4 @@ tree.insert(15)
 tree.insert(3)
 tree.insert(8)
 tree.insert(20)
-console.log(tree.preOrder());
+console.log(tree.postOrder());
